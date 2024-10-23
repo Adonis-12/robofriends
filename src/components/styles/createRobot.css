@@ -1,0 +1,69 @@
+/* General Styles */
+.container {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    padding: 10px;
+}
+
+.font {
+    font-weight: 300;
+    box-shadow: inset 5px 5px 5px 1px rgba(241, 239, 239, 0.8);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 20px;
+    background-color: rgb(223, 255, 244);
+    flex: 1  ; /* Flex item to take 45% of the width */
+    max-width: 300px;
+    text-align: center; /* Center align the content */
+}
+
+button {
+    padding: 10px;
+    margin: 30px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    transition: 0.1s;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+}
+
+button:hover {
+    transform: scale(1.2);
+}
+
+/* Media Query for Devices with Max Width 768px (Tablets & Phones) */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center;    /* Center items */
+    }
+
+    .font {
+        width:70%;  /* Adjust the width for smaller screens */
+        max-width: none; /* Remove max-width constraint */
+        margin: 10px auto; /* Center the elements with margin */
+    }
+
+    button {
+        width: 80%;  /* Buttons take up more width on smaller screens */
+        margin: 20px auto; /* Center buttons */
+    }
+}
+
+/* Media Query for Smaller Mobile Screens (Max Width 480px) */
+@media screen and (max-width: 480px) {
+    .font {
+        width: 100%; /* Make the element take full width */
+        margin: 5px auto; /* Center and reduce margin */
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;  /* Buttons take up full width */
+        margin: 15px auto; /* Reduce margin */
+    }
+}
