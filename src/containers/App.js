@@ -1,79 +1,54 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import CardList from '../components/scripts/cardList';
-import { robots as initialRobots } from './robots';
 import Searchbox from '../components/scripts/Searchbox';
 import CreateRobot from '../components/scripts/createRobot';
 import '../components/styles/App.css';
 import ErrorBoundary from '../components/scripts/ErrorBoundary';
 import Scroll from '../components/scripts/Scroll';
+import { addEmail, addFirstName, addLastName, addRobot, changeSearchField } from '../redux/actions';
+
+const mapStateToProps = state => {
+    return {
+        searchField : state.searchField,
+        robots: state.robots,
+        firstName: state.firstName,
+        lastName: state.lastName,
+        email: state.email
+    }
+}
+const mapDispatchProps = (dispatch) => {
+   return {
+        onSearchChange: (event) => dispatch(changeSearchField(event.target.value)),
+        onfirst: (event) => dispatch(addFirstName(event.target.value)),
+        onlast: (event) => dispatch(addLastName(event.target.value)),
+        onemail: (event) => dispatch(addEmail(event.target.value)),
+        onAddRobot: (robot) => dispatch(addRobot(robot))
+    }
+}
 
 class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            robots: [], 
-            searchfield: '',
-            first: '',
-            last: '',
-            email: ''
-        };
-    }
-
-    componentDidMount(){
-        const savedRobots = JSON.parse(localStorage.getItem('robots'));
-        if(savedRobots){
-            this.setState({ robots: savedRobots });
-        } else {
-            this.setState({ robots: initialRobots });
-        }
-    }
-
-    // Update state on input change
-    onSearchChange = (event) => {
-        this.setState({ searchfield: event.target.value });
-    };
-
-    onfirst = (event) => {
-        this.setState({ first: event.target.value });
-    };
-
-    onlast = (event) => {
-        this.setState({ last: event.target.value });
-    };
-
-    onemail = (event) => {
-        this.setState({ email: event.target.value });
-    };
-
+   
     // Pushing data to robots array
     push = () => {
-        const { first, last, email } = this.state;
+        const { firstName, lastName, email } = this.props;
 
         // Validate empty fields
-        if (!first || !last || !last) {
+        if (!firstName || !lastName || !email) {
             alert('Please fill in all fields!');
             return;
         }
 
         const user = {
-            first_name: first,
-            last_name: last,
+            first_name: firstName,
+            last_name: lastName,
             email: email
         };
+        
+        this.props.onAddRobot(user);
+        
+        };
 
-        // Updating robots array and storing in localStorage
-        this.setState((prevState) => {
-            const updatedRobots = [...prevState.robots, user];
-            localStorage.setItem('robots', JSON.stringify(updatedRobots));
-
-            return {
-                robots: updatedRobots,
-                first: '',  // Reset input fields
-                last: '',
-                email: ''
-            };
-        });
-    };
 
     onKeyPress = (event) => {
         if (event.key === 'Enter') {
@@ -83,25 +58,34 @@ class App extends Component {
 
     render() {
         // Filtering the robots based on search content
-        const { robots, searchfield, first, last, email } = this.state;
+        const {searchField , 
+                onSearchChange ,
+                onfirst,
+                onlast,
+                onemail, 
+                robots , 
+                firstName, 
+                lastName, 
+                email} = this.props;
+
         const filteredRobots = robots.filter(robot =>
-            robot.first_name.toLowerCase().includes(searchfield.toLowerCase())
+            robot.first_name.toLowerCase().includes(searchField.toLowerCase())
         );
 
         return (
             <div className='tc'>
                 <h1 className='f1'>ROBOFRIENDS</h1>
                 <CreateRobot
-                    first={this.onfirst}
-                    last={this.onlast}
-                    email={this.onemail}
+                    first={onfirst}
+                    last={onlast}
+                    email={onemail}
                     push={this.push}
-                    firstValue={first}
-                    lastValue={last}
+                    firstValue={firstName}
+                    lastValue={lastName}
                     emailValue={email}
                     keyPress={this.onKeyPress}
                 />
-                <Searchbox searchChange={this.onSearchChange} />
+                <Searchbox searchChange={onSearchChange} />
                 <Scroll>
                 <ErrorBoundary>
                 <CardList robots={filteredRobots} />
@@ -112,4 +96,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default connect(mapStateToProps,mapDispatchProps)(App);
