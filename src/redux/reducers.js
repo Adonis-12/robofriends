@@ -21,7 +21,7 @@ export const rootReducer = (state = initialState , action={}) => {
         case ADD_ROBOT :
             const updatedRobots = [...state.robots , action.payload ];
             localStorage.setItem('robots',JSON.stringify(updatedRobots));
-            return{...state , robots : updatedRobots , firstName:'', astName:'', email:''};
+            return{...state , robots : updatedRobots , firstName:'', lastName:'', email:''};
 
         case ADD_FIRSTNAME:
             return {...state , firstName:action.payload};
