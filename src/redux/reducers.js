@@ -5,11 +5,11 @@ import { CHANGE_SEARCHFIELD ,
          ADD_EMAIL,
          GET_DATA
         } from "./constants";
-import {robots} from '../components/scripts/robots'
+import {robots} from '../robots/robots'
 
 const initialState = {
     searchField:'',
-    robots: JSON.parse(localStorage.getItem('robots')) || robots,
+    robots: robots,
     firstName:'',
     lastName:'',
     email:''
