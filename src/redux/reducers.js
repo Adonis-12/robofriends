@@ -2,12 +2,14 @@ import { CHANGE_SEARCHFIELD ,
          ADD_ROBOT,
          ADD_FIRSTNAME,
          ADD_LASTNAME,
-         ADD_EMAIL
+         ADD_EMAIL,
+         GET_DATA
         } from "./constants";
+import {robots} from '../components/scripts/robots'
 
 const initialState = {
     searchField:'',
-    robots: JSON.parse(localStorage.getItem('robots')) || [],
+    robots: JSON.parse(localStorage.getItem('robots')) || robots,
     firstName:'',
     lastName:'',
     email:''
@@ -31,6 +33,11 @@ export const rootReducer = (state = initialState , action={}) => {
 
         case ADD_EMAIL:
             return {...state , email:action.payload };
+        case GET_DATA:
+            return async function getData(array){
+                const response = await fetch('https://jsonplaceholder.typicode.com/users');
+                return response.json();
+            }
     
         default:
             return state;

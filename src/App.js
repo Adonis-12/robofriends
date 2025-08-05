@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CardList from '../components/scripts/cardList';
-import Searchbox from '../components/scripts/Searchbox';
-import CreateRobot from '../components/scripts/createRobot';
-import '../components/styles/App.css';
-import ErrorBoundary from '../components/scripts/ErrorBoundary';
-import Scroll from '../components/scripts/Scroll';
-import { addEmail, addFirstName, addLastName, addRobot, changeSearchField } from '../redux/actions';
+import CardList from './components/scripts/cardList';
+import Searchbox from './components/scripts/Searchbox';
+import CreateRobot from './components/scripts/createRobot';
+import './components/styles/App.css';
+import ErrorBoundary from './components/scripts/ErrorBoundary';
+// import Scroll from './components/scripts/Scroll';
+import { addEmail, addFirstName, addLastName, addRobot, changeSearchField } from './redux/actions';
 
+//GETTING STATE
 const mapStateToProps = state => {
     return {
         searchField : state.searchField,
@@ -17,6 +18,8 @@ const mapStateToProps = state => {
         email: state.email
     }
 }
+
+// DISPATCHING VALUES TO THE STORE 
 const mapDispatchProps = (dispatch) => {
    return {
         onSearchChange: (event) => dispatch(changeSearchField(event.target.value)),
@@ -49,7 +52,7 @@ class App extends Component {
         
         };
 
-
+    //ADDING EVENT LISTENNER
     onKeyPress = (event) => {
         if (event.key === 'Enter') {
             this.push();
@@ -74,7 +77,7 @@ class App extends Component {
 
         return (
             <div className='tc'>
-                <h1 className='f1'>ROBOFRIENDS</h1>
+                <h1 className='f1 white'>ROBOFRIENDS</h1>
                 <CreateRobot
                     first={onfirst}
                     last={onlast}
@@ -86,11 +89,9 @@ class App extends Component {
                     keyPress={this.onKeyPress}
                 />
                 <Searchbox searchChange={onSearchChange} />
-                <Scroll>
                 <ErrorBoundary>
                 <CardList robots={filteredRobots} />
                 </ErrorBoundary>
-                </Scroll>
             </div>
         );
     }
