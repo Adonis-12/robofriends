@@ -13,9 +13,9 @@ const mapStateToProps = state => {
     return {
         searchField : state.searchField,
         robots: state.robots,
-        firstName: state.firstName,
-        lastName: state.lastName,
-        email: state.email
+        // firstName: state.firstName,
+        // lastName: state.lastName,
+        // email: state.email
     }
 }
 
@@ -23,53 +23,54 @@ const mapStateToProps = state => {
 const mapDispatchProps = (dispatch) => {
    return {
         onSearchChange: (event) => dispatch(changeSearchField(event.target.value)),
-        onfirst: (event) => dispatch(addFirstName(event.target.value)),
-        onlast: (event) => dispatch(addLastName(event.target.value)),
-        onemail: (event) => dispatch(addEmail(event.target.value)),
-        onAddRobot: (robot) => dispatch(addRobot(robot))
+        // onfirst: (event) => dispatch(addFirstName(event.target.value)),
+        // onlast: (event) => dispatch(addLastName(event.target.value)),
+        // onemail: (event) => dispatch(addEmail(event.target.value)),
+        // onAddRobot: (robot) => dispatch(addRobot(robot))
     }
 }
 
 class App extends Component {
    
     // Pushing data to robots array
-    push = () => {
-        const { firstName, lastName, email } = this.props;
+    // push = () => {
+    //     const { firstName, lastName, email } = this.props;
 
-        // Validate empty fields
-        if (!firstName || !lastName || !email) {
-            alert('Please fill in all fields!');
-            return;
-        }
+    //     // Validate empty fields
+    //     if (!firstName || !lastName || !email) {
+    //         alert('Please fill in all fields!');
+    //         return;
+    //     }
 
-        const user = {
-            first_name: firstName,
-            last_name: lastName,
-            email: email
-        };
+    //     const user = {
+    //         first_name: firstName,
+    //         last_name: lastName,
+    //         email: email
+    //     };
         
-        this.props.onAddRobot(user);
+    //     this.props.onAddRobot(user);
         
-        };
+    //     };
 
-    //ADDING EVENT LISTENNER
-    onKeyPress = (event) => {
-        if (event.key === 'Enter') {
-            this.push();
-        }
-    };
+    // //ADDING EVENT LISTENNER
+    // onKeyPress = (event) => {
+    //     if (event.key === 'Enter') {
+    //         this.push();
+    //     }
+    // };
 
     render() {
         // Filtering the robots based on search content
         const {searchField , 
                 onSearchChange ,
-                onfirst,
-                onlast,
-                onemail, 
+                // onfirst,
+                // onlast,
+                // onemail, 
                 robots , 
-                firstName, 
-                lastName, 
-                email} = this.props;
+                // firstName, 
+                // lastName, 
+                // email
+                } = this.props;
 
         const filteredRobots = robots.filter(robot =>
             robot.first_name.toLowerCase().includes(searchField.toLowerCase())
@@ -78,7 +79,7 @@ class App extends Component {
         return (
             <div className='tc'>
                 <h1 className='f1 white'>ROBOFRIENDS</h1>
-                <CreateRobot
+                {/* <CreateRobot
                     first={onfirst}
                     last={onlast}
                     email={onemail}
@@ -87,7 +88,8 @@ class App extends Component {
                     lastValue={lastName}
                     emailValue={email}
                     keyPress={this.onKeyPress}
-                />
+                /> */}  
+                {/* this feature allowed you to make your own profile directly from UI*/}
                 <Searchbox searchChange={onSearchChange} />
                 <ErrorBoundary>
                 <CardList robots={filteredRobots} />
