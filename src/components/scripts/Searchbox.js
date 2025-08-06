@@ -5,7 +5,7 @@ const Searchbox = ({searchChange}) => {
     return(
         <div>
             <input type='text' 
-            placeholder='Search for your friend here' 
+            placeholder='Search for your friend' 
             className=' search'
             onChange={searchChange} 
             />    
