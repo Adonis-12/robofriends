@@ -26,7 +26,7 @@ This is a simple React-based web app that displays a list of robot friends , cre
 
 ## 🖥️ Demo
 
- you can clone and run locally as below.
+ Checkout <a href='https://robofriends-self.vercel.app/'>RoboFriends<a> or you can clone and run locally as below.
 
 ---
 
