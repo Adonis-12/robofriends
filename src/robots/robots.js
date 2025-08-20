@@ -10,13 +10,13 @@ export const robots = [
     id: 2,
     first_name: "Lakshita",
     last_name: "Bajaj",
-    email: "thapabhumi546@gmail.com",
+    email: " bajaj321@gmail.com",
   },
   { 
     id: 3,
     first_name: "Bhumi", 
     last_name: "Thapa", 
-    email: "aman45@yahoo.com" },
+    email: "thapabhumi546@gmail.com" },
   {
     id: 4,
     first_name: "Jasbir",
@@ -57,7 +57,7 @@ export const robots = [
     id: 10,
     first_name: "Aman",
     last_name: "Thapa",
-    email: "bajaj321@gmail.com",
+    email: "aman45@yahoo.com",
   },
 
 
